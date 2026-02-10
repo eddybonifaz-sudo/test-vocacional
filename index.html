@@ -736,7 +736,7 @@
         <!-- Section 2: Test Questions -->
         <section id="section-test" class="section">
             <div class="questions-counter">
-                Pregunta <strong id="currentQuestion">1</strong> de <strong>80</strong>
+                Pregunta <strong id="currentQuestion">1</strong> de <strong>25</strong>
             </div>
 
             <div id="questions-container"></div>
@@ -856,9 +856,9 @@
                 <h2 class="success-title">¡Felicitaciones!</h2>
                 <p class="success-message">
                     Pronto nos pondremos en contacto contigo para brindarte más información 
-                    sobre las carreras que ofrece la Universidad de Otavalo. Para revisar las 
+                    sobre las carreras que ofrece la Universidad de Otavalo. Para revisar las
                     fotografías del evento ingresa a este enlace:
-                    https://surl.li/qonujl 
+                    https://n9.cl/uj7a7
                 </p>
                 <button class="btn btn-primary" onclick="restartTest()">
                     Realizar otro test
@@ -870,88 +870,42 @@
     <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
 
     <script>
-        // Questions data based on the PDF
+        // Questions data - VERSIÓN CORTA (25 preguntas - 5 por área)
         const questions = [
-            { id: 1, text: "Diseñar programas de computación y explorar nuevas aplicaciones tecnológicas para uso del internet.", area: 4 },
-            { id: 2, text: "Criar, cuidar y tratar animales domésticos y de campo.", area: 5 },
-            { id: 3, text: "Investigar sobre áreas verdes, medio ambiente y cambios climáticos.", area: 5 },
-            { id: 4, text: "Ilustrar, dibujar y animar digitalmente.", area: 1 },
-            { id: 5, text: "Seleccionar, capacitar y motivar al personal de una organización/empresa.", area: 3 },
-            { id: 6, text: "Realizar excavaciones para descubrir restos del pasado.", area: 2 },
-            { id: 7, text: "Resolver problemas de cálculo para construir un puente.", area: 4 },
-            { id: 8, text: "Diseñar cursos para enseñar a la gente sobre temas de salud e higiene.", area: 5 },
-            { id: 9, text: "Tocar un instrumento y componer música.", area: 1 },
-            { id: 10, text: "Planificar cuáles son las metas de una organización pública o privada a mediano y largo plazo.", area: 3 },
-            { id: 11, text: "Diseñar y planificar la producción masiva de artículos como muebles, autos, equipos de oficina, empaques y envases para alimentos y otros.", area: 4 },
-            { id: 12, text: "Diseñar logotipos y portadas de una revista.", area: 1 },
-            { id: 13, text: "Organizar eventos y atender a sus asistentes.", area: 2 },
-            { id: 14, text: "Atender la salud de personas enfermas.", area: 5 },
-            { id: 15, text: "Controlar ingresos y egresos de fondos y presentar el balance final de una institución.", area: 3 },
-            { id: 16, text: "Hacer experimentos con plantas (frutas, árboles, flores).", area: 5 },
-            { id: 17, text: "Concebir planos para viviendas, edificios y ciudadelas.", area: 4 },
-            { id: 18, text: "Investigar y probar nuevos productos farmacéuticos.", area: 5 },
-            { id: 19, text: "Hacer propuestas y formular estrategias para aprovechar las relaciones económicas entre dos países.", area: 3 },
-            { id: 20, text: "Pintar, hacer esculturas, ilustrar libros de arte, etcétera.", area: 1 },
-            { id: 21, text: "Elaborar campañas para introducir un nuevo producto al mercado.", area: 3 },
-            { id: 22, text: "Examinar y tratar los problemas visuales.", area: 5 },
-            { id: 23, text: "Defender a clientes individuales o empresas en juicios de diferente naturaleza.", area: 2 },
-            { id: 24, text: "Diseñar máquinas que puedan simular actividades humanas.", area: 4 },
-            { id: 25, text: "Investigar las causas y efectos de los trastornos emocionales.", area: 2 },
-            { id: 26, text: "Supervisar las ventas de un centro comercial.", area: 3 },
-            { id: 27, text: "Atender y realizar ejercicios a personas que tienen limitaciones físicas, problemas de lenguaje, etcétera.", area: 5 },
-            { id: 28, text: "Prepararse para ser modelo profesional.", area: 1 },
-            { id: 29, text: "Aconsejar a las personas sobre planes de ahorro e inversiones.", area: 3 },
-            { id: 30, text: "Elaborar mapas, planos e imágenes para el estudio y análisis de datos geográficos.", area: 4 },
-            { id: 31, text: "Diseñar juegos interactivos electrónicos para computadora.", area: 1 },
-            { id: 32, text: "Realizar el control de calidad de los alimentos.", area: 5 },
-            { id: 33, text: "Tener un negocio propio de tipo comercial.", area: 3 },
-            { id: 34, text: "Escribir artículos periodísticos, cuentos, novelas y otros.", area: 2 },
-            { id: 35, text: "Redactar guiones y libretos para un programa de televisión.", area: 1 },
-            { id: 36, text: "Organizar un plan de distribución y venta de un gran almacén.", area: 3 },
-            { id: 37, text: "Estudiar la diversidad cultural en el ámbito rural y urbano.", area: 2 },
-            { id: 38, text: "Gestionar y evaluar convenios internacionales de cooperación para el desarrollo social.", area: 2 },
-            { id: 39, text: "Crear campañas publicitarias.", area: 1 },
-            { id: 40, text: "Trabajar investigando la reproducción de peces, camarones y otros animales marinos.", area: 5 },
-            { id: 41, text: "Dedicarse a fabricar productos alimenticios de consumo masivo.", area: 5 },
-            { id: 42, text: "Gestionar y evaluar proyectos de desarrollo en una institución educativa y/o fundación.", area: 2 },
-            { id: 43, text: "Rediseñar y decorar espacios físicos en viviendas, oficinas y locales comerciales.", area: 1 },
-            { id: 44, text: "Administrar una empresa de turismo y/o agencias de viaje.", area: 3 },
-            { id: 45, text: "Aplicar métodos alternativos a la medicina tradicional para atender personas con dolencias de diversa índole.", area: 5 },
-            { id: 46, text: "Diseñar ropa para niños, jóvenes y adultos.", area: 1 },
-            { id: 47, text: "Investigar organismos vivos para elaborar vacunas.", area: 5 },
-            { id: 48, text: "Manejar y/o dar mantenimiento a dispositivos/aparatos tecnológicos en aviones, barcos, radares, etcétera.", area: 4 },
-            { id: 49, text: "Estudiar idiomas extranjeros –actuales y antiguos- para hacer traducción.", area: 2 },
-            { id: 50, text: "Restaurar piezas y obras de arte.", area: 1 },
-            { id: 51, text: "Revisar y dar mantenimiento a artefactos eléctricos, electrónicos y computadoras.", area: 4 },
-            { id: 52, text: "Enseñar a niños de 0 a 5 años.", area: 2 },
-            { id: 53, text: "Investigar y/o sondear nuevos mercados.", area: 3 },
-            { id: 54, text: "Atender la salud dental de las personas.", area: 5 },
-            { id: 55, text: "Tratar a niños, jóvenes y adultos con problemas psicológicos.", area: 2 },
-            { id: 56, text: "Crear estrategias de promoción y venta de nuevos productos ecuatorianos en el mercado internacional.", area: 3 },
-            { id: 57, text: "Planificar y recomendar dietas para personas diabéticas y/o con sobrepeso.", area: 5 },
-            { id: 58, text: "Trabajar en una empresa petrolera en un cargo técnico como control de la producción.", area: 4 },
-            { id: 59, text: "Administrar una empresa (familiar, privada o pública).", area: 3 },
-            { id: 60, text: "Tener un taller de reparación y mantenimiento de carros, tractores, etcétera.", area: 4 },
-            { id: 61, text: "Ejecutar proyectos de extracción minera y metalúrgica.", area: 4 },
-            { id: 62, text: "Asistir a directivos de multinacionales con manejo de varios idiomas.", area: 3 },
-            { id: 63, text: "Diseñar programas educativos para niños con discapacidad.", area: 2 },
-            { id: 64, text: "Aplicar conocimientos de estadística en investigaciones en diversas áreas (social, administrativa, salud, etcétera).", area: 4 },
-            { id: 65, text: "Fotografiar hechos históricos, lugares significativos, rostros, paisajes para el área publicitaria, artística, periodística y social.", area: 1 },
-            { id: 66, text: "Trabajar en museos y bibliotecas nacionales e internacionales.", area: 2 },
-            { id: 67, text: "Ser parte de un grupo de teatro.", area: 1 },
-            { id: 68, text: "Producir cortometrajes, spots publicitarios, programas educativos, de ficción, etcétera.", area: 1 },
-            { id: 69, text: "Estudiar la influencia entre las corrientes marinas y el clima y sus consecuencias ecológicas.", area: 5 },
-            { id: 70, text: "Conocer las distintas religiones, su filosofía y transmitirlas a la comunidad en general.", area: 2 },
-            { id: 71, text: "Asesorar a inversionistas en la compra de bienes/acciones en mercados nacionales e internacionales.", area: 3 },
-            { id: 72, text: "Estudiar grupos étnicos, sus costumbres, tradiciones, cultura y compartir sus vivencias.", area: 2 },
-            { id: 73, text: "Explorar el espacio sideral, los planetas, características y componentes.", area: 4 },
-            { id: 74, text: "Mejorar la imagen facial y corporal de las personas aplicando diferentes técnicas.", area: 5 },
-            { id: 75, text: "Decorar jardines de casas y parques públicos.", area: 1 },
-            { id: 76, text: "Administrar y renovar menúes de comidas en un hotel o restaurante.", area: 5 },
-            { id: 77, text: "Trabajar como presentador de televisión, locutor de radio y televisión, animador de programas culturales y concursos.", area: 1 },
-            { id: 78, text: "Diseñar y ejecutar programas de turismo.", area: 2 },
-            { id: 79, text: "Administrar y ordenar (planificar) adecuadamente la ocupación del espacio físico de ciudades, países etc., utilizando imágenes de satélite, mapas.", area: 4 },
-            { id: 80, text: "Organizar, planificar y administrar centros educativos.", area: 3 }
+            // ÁREA 1: Arte y Creatividad (5 preguntas)
+            { id: 1, text: "Ilustrar, dibujar y animar digitalmente.", area: 1 },
+            { id: 2, text: "Diseñar logotipos y portadas de una revista.", area: 1 },
+            { id: 3, text: "Tocar un instrumento y componer música.", area: 1 },
+            { id: 4, text: "Crear campañas publicitarias.", area: 1 },
+            { id: 5, text: "Fotografiar hechos históricos, lugares significativos, rostros y paisajes.", area: 1 },
+            
+            // ÁREA 2: Ciencias Sociales (5 preguntas)
+            { id: 6, text: "Investigar las causas y efectos de los trastornos emocionales.", area: 2 },
+            { id: 7, text: "Enseñar a niños de 0 a 5 años.", area: 2 },
+            { id: 8, text: "Diseñar programas educativos para niños con discapacidad.", area: 2 },
+            { id: 9, text: "Tratar a niños, jóvenes y adultos con problemas psicológicos.", area: 2 },
+            { id: 10, text: "Estudiar idiomas extranjeros para hacer traducción.", area: 2 },
+            
+            // ÁREA 3: Económica, Administrativa y Financiera (5 preguntas)
+            { id: 11, text: "Planificar las metas de una organización pública o privada.", area: 3 },
+            { id: 12, text: "Controlar ingresos y egresos de fondos de una institución.", area: 3 },
+            { id: 13, text: "Tener un negocio propio de tipo comercial.", area: 3 },
+            { id: 14, text: "Administrar una empresa (familiar, privada o pública).", area: 3 },
+            { id: 15, text: "Elaborar campañas para introducir un nuevo producto al mercado.", area: 3 },
+            
+            // ÁREA 4: Ciencia y Tecnología (5 preguntas)
+            { id: 16, text: "Diseñar programas de computación y explorar nuevas aplicaciones tecnológicas.", area: 4 },
+            { id: 17, text: "Resolver problemas de cálculo para construir un puente.", area: 4 },
+            { id: 18, text: "Diseñar máquinas que puedan simular actividades humanas.", area: 4 },
+            { id: 19, text: "Concebir planos para viviendas, edificios y ciudadelas.", area: 4 },
+            { id: 20, text: "Aplicar conocimientos de estadística en investigaciones.", area: 4 },
+            
+            // ÁREA 5: Ciencias Ecológicas, Biológicas y de la Salud (5 preguntas)
+            { id: 21, text: "Atender la salud de personas enfermas.", area: 5 },
+            { id: 22, text: "Investigar y probar nuevos productos farmacéuticos.", area: 5 },
+            { id: 23, text: "Planificar y recomendar dietas para personas diabéticas y/o con sobrepeso.", area: 5 },
+            { id: 24, text: "Atender la salud dental de las personas.", area: 5 },
+            { id: 25, text: "Investigar organismos vivos para elaborar vacunas.", area: 5 }
         ];
 
         const areaNames = {
@@ -1015,7 +969,7 @@
                 
                 const questionHTML = `
                     <div class="question-card" id="question-${q.id}">
-                        <div class="question-number">Pregunta ${q.id} de 80</div>
+                        <div class="question-number">Pregunta ${q.id} de 25</div>
                         <p class="question-text">${q.text}</p>
                         <div class="question-options">
                             <button class="option-btn ${answered === true ? 'selected-yes' : ''}" 
@@ -1247,7 +1201,7 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 16,
+                                max: 5,
                                 ticks: {
                                     color: 'rgba(255, 255, 255, 0.6)',
                                     font: {
@@ -1291,7 +1245,7 @@
                                 <div class="area-color" style="background: ${areaColors[item.area]}"></div>
                                 <span class="area-name">${areaNames[item.area]}</span>
                             </div>
-                            <span class="area-score">${item.score}/16</span>
+                            <span class="area-score">${item.score}/5</span>
                         </div>
                     `;
                 });
