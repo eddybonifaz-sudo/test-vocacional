@@ -716,6 +716,18 @@
                     <span class="error-message">Ingresa un correo válido</span>
                 </div>
 
+                <div class="consent-container" style="margin-bottom: 20px; padding: 15px; background: rgba(99, 102, 241, 0.1); border-radius: 16px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                    <label class="consent-label" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                        <input type="checkbox" id="consentimiento" style="width: 22px; height: 22px; min-width: 22px; margin-top: 3px; accent-color: var(--primary); cursor: pointer;">
+                        <span style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                            Autorizo el tratamiento de mis datos personales de acuerdo con la <strong style="color: var(--primary-light);">Ley Orgánica de Protección de Datos Personales</strong>. 
+                            Entiendo que mis datos serán utilizados únicamente con fines educativos y de orientación vocacional, 
+                            y que puedo solicitar su eliminación en cualquier momento.
+                        </span>
+                    </label>
+                    <span id="consent-error" style="color: #ef4444; font-size: 0.8rem; margin-top: 8px; display: none;">Debes aceptar el tratamiento de datos para continuar</span>
+                </div>
+
                 <button class="btn btn-primary" onclick="startTest()">
                     Comenzar Test
                     <span>→</span>
@@ -855,9 +867,9 @@
                 <div class="success-icon">🎉</div>
                 <h2 class="success-title">¡Felicitaciones!</h2>
                 <p class="success-message">
-                    Pronto nos pondremos en contacto contigo para brindarte más información 
-                    sobre las carreras que ofrece la Universidad de Otavalo. Para revisar las
-                    fotografías del evento ingresa a este enlace:
+                   Pronto nos pondremos en contacto contigo para brindarte más información 
+                    sobre las carreras que ofrece la Universidad de Otavalo. Para revisar 
+                    las fotografías del evento ingresa a este enlace: 
                     https://n9.cl/uj7a7
                 </p>
                 <button class="btn btn-primary" onclick="restartTest()">
@@ -1085,11 +1097,14 @@
             const institucion = document.getElementById('institucion');
             const celular = document.getElementById('celular');
             const email = document.getElementById('email');
+            const consentimiento = document.getElementById('consentimiento');
+            const consentError = document.getElementById('consent-error');
 
             let valid = true;
 
             // Reset errors
             document.querySelectorAll('.input-group').forEach(g => g.classList.remove('error'));
+            consentError.style.display = 'none';
 
             if (!nombres.value.trim()) {
                 nombres.parentElement.classList.add('error');
@@ -1108,6 +1123,11 @@
 
             if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
                 email.parentElement.classList.add('error');
+                valid = false;
+            }
+
+            if (!consentimiento.checked) {
+                consentError.style.display = 'block';
                 valid = false;
             }
 
@@ -1382,6 +1402,7 @@
             document.getElementById('institucion').value = '';
             document.getElementById('celular').value = '';
             document.getElementById('email').value = '';
+            document.getElementById('consentimiento').checked = false;
 
             // Clear career selection
             document.querySelectorAll('.career-option').forEach(opt => opt.classList.remove('selected'));
