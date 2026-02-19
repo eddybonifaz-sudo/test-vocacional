@@ -591,6 +591,72 @@
             .question-text { font-size: 1rem; }
             .option-btn { padding: 14px 16px; font-size: 0.9rem; }
         }
+
+        /* Career Options */
+        .career-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .career-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .career-option:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: var(--primary);
+        }
+
+        .career-option input[type="radio"] {
+            display: none;
+        }
+
+        .career-option .career-radio {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .career-option.selected {
+            background: rgba(139, 92, 246, 0.25);
+            border-color: var(--primary);
+        }
+
+        .career-option.selected .career-radio {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .career-option.selected .career-radio::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+        }
+
+        .career-option .career-text {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .career-option .career-text small {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -723,16 +789,63 @@
                     </div>
                 </div>
 
-                <div class="card" style="text-align: left; margin-top: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));">
-                    <h3 style="font-size: 1rem; margin-bottom: 12px;">🎓 Carreras que te esperan:</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">
-                        <strong style="color: var(--blue);">Educación Básica</strong> - Forma a las nuevas generaciones<br>
-                        <strong style="color: var(--accent);">Educación Inicial</strong> - Trabaja con los más pequeños<br>
-                        <strong style="color: var(--pink);">Psicología Educativa</strong> - Comprende la mente del estudiante
-                    </p>
+                <!-- Selección de carrera -->
+                <div class="card" style="text-align: left; margin-top: 20px;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 15px; text-align: center;">🎓 ¿Qué carrera te gustaría estudiar?</h3>
+                    
+                    <div class="career-options" id="careerOptions">
+                        <label class="career-option" onclick="selectCareer(this, 'Psicología Educativa (Presencial)')">
+                            <input type="radio" name="carrera" value="Psicología Educativa (Presencial)">
+                            <span class="career-radio"></span>
+                            <span class="career-text">🧠 Psicología Educativa <small>(Presencial)</small></span>
+                        </label>
+                        
+                        <label class="career-option" onclick="selectCareer(this, 'Educación Inicial (Presencial)')">
+                            <input type="radio" name="carrera" value="Educación Inicial (Presencial)">
+                            <span class="career-radio"></span>
+                            <span class="career-text">👶 Educación Inicial <small>(Presencial)</small></span>
+                        </label>
+                        
+                        <label class="career-option" onclick="selectCareer(this, 'Educación Básica (Presencial)')">
+                            <input type="radio" name="carrera" value="Educación Básica (Presencial)">
+                            <span class="career-radio"></span>
+                            <span class="career-text">📚 Educación Básica <small>(Presencial)</small></span>
+                        </label>
+                        
+                        <label class="career-option" onclick="selectCareer(this, 'Educación Básica (En Línea)')">
+                            <input type="radio" name="carrera" value="Educación Básica (En Línea)">
+                            <span class="career-radio"></span>
+                            <span class="career-text">💻 Educación Básica <small>(En Línea)</small></span>
+                        </label>
+                        
+                        <label class="career-option" onclick="selectCareer(this, '__otro__')">
+                            <input type="radio" name="carrera" value="Otro">
+                            <span class="career-radio"></span>
+                            <span class="career-text">🔍 Otra carrera</span>
+                        </label>
+                    </div>
+                    
+                    <div id="otro-input-container" style="display: none; margin-top: 12px;">
+                        <input type="text" id="otro-carrera-input" placeholder="¿Qué carrera te interesa?" 
+                               style="width: 100%; padding: 14px 18px; background: rgba(255,255,255,0.08); border: 2px solid var(--primary); border-radius: 14px; color: white; font-family: 'Poppins', sans-serif; font-size: 0.95rem;">
+                    </div>
+                    
+                    <span id="career-error" style="color: #ef4444; font-size: 0.8rem; margin-top: 10px; display: none; text-align: center;">Por favor selecciona una carrera</span>
+                    
+                    <button class="btn btn-primary" style="margin-top: 20px; display: none;" onclick="submitFinal()" id="submitFinalBtn">
+                        ✅ Enviar mi respuesta
+                    </button>
                 </div>
 
-                <button class="btn btn-primary" style="margin-top: 25px;" onclick="restartGame()">
+                <!-- Enlace de fotos -->
+                <div class="card" style="text-align: center; margin-top: 15px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.1));">
+                    <h3 style="font-size: 1rem; margin-bottom: 12px;">📸 ¡Descarga las fotos del evento!</h3>
+                    <a href="https://n9.cl/uj7a7" target="_blank" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg, var(--secondary), var(--pink)); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; transition: transform 0.3s ease;">
+                        📷 Ver Fotos
+                    </a>
+                </div>
+                
+                <button class="btn" style="margin-top: 15px; background: rgba(255,255,255,0.1); color: var(--text-secondary);" onclick="restartGame()">
                     🔄 Jugar de Nuevo
                 </button>
             </div>
@@ -971,6 +1084,8 @@
         let timeRemaining = 180; // 3 minutos
         let timerInterval = null;
         let gameStartTime = null;
+        let gameTimeSpent = 0;
+        let selectedCareer = '';
 
         // Shuffle array
         function shuffleArray(array) {
@@ -1151,9 +1266,9 @@
         function endGame() {
             clearInterval(timerInterval);
             
-            const timeSpent = Math.floor((Date.now() - gameStartTime) / 1000);
-            const minutes = Math.floor(timeSpent / 60);
-            const seconds = timeSpent % 60;
+            gameTimeSpent = Math.floor((Date.now() - gameStartTime) / 1000);
+            const minutes = Math.floor(gameTimeSpent / 60);
+            const seconds = gameTimeSpent % 60;
 
             // Set results
             document.getElementById('finalScore').textContent = score;
@@ -1189,7 +1304,105 @@
 
             showSection('section-results');
             launchConfetti();
-            submitResults(timeSpent);
+        }
+
+        // Select career
+        function selectCareer(element, career) {
+            document.querySelectorAll('.career-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedCareer = career;
+            document.getElementById('career-error').style.display = 'none';
+            
+            // Mostrar/ocultar campo de texto para "Otro"
+            const otroInput = document.getElementById('otro-input-container');
+            const submitBtn = document.getElementById('submitFinalBtn');
+            
+            if (career === '__otro__') {
+                otroInput.style.display = 'block';
+                submitBtn.style.display = 'flex';
+                document.getElementById('otro-carrera-input').focus();
+            } else {
+                otroInput.style.display = 'none';
+                submitBtn.style.display = 'none';
+                
+                // Envío automático
+                autoSubmit(career);
+            }
+        }
+        
+        // Envío automático
+        function autoSubmit(career) {
+            selectedCareer = career;
+            
+            // Mostrar estado de envío
+            const careerCard = document.querySelector('.career-options').parentElement;
+            
+            // Crear mensaje de envío
+            let statusMsg = document.getElementById('auto-status-msg');
+            if (!statusMsg) {
+                statusMsg = document.createElement('div');
+                statusMsg.id = 'auto-status-msg';
+                statusMsg.style.cssText = 'text-align: center; margin-top: 15px; padding: 12px; border-radius: 12px;';
+                careerCard.appendChild(statusMsg);
+            }
+            
+            statusMsg.innerHTML = '<div class="spinner" style="margin: 0 auto;"></div><p style="margin-top: 10px; color: var(--text-secondary);">Enviando datos...</p>';
+            statusMsg.style.background = 'rgba(139, 92, 246, 0.1)';
+            
+            // Enviar datos
+            submitResults(gameTimeSpent);
+            
+            // Mostrar confirmación
+            setTimeout(() => {
+                statusMsg.innerHTML = '<p style="color: #10b981; font-weight: 600;">🎉 ¡Gracias por participar!<br></p>';
+                statusMsg.style.background = 'rgba(16, 185, 129, 0.15)';
+            }, 1500);
+        }
+
+        // Submit final (para opción "Otro")
+        function submitFinal() {
+            if (!selectedCareer) {
+                document.getElementById('career-error').style.display = 'block';
+                return;
+            }
+            
+            // Si seleccionó Otro, verificar que escribió algo
+            let carreraFinal = selectedCareer;
+            if (selectedCareer === '__otro__') {
+                const otroTexto = document.getElementById('otro-carrera-input').value.trim();
+                if (!otroTexto) {
+                    alert('Por favor escribe qué carrera te interesa');
+                    document.getElementById('otro-carrera-input').focus();
+                    return;
+                }
+                carreraFinal = 'Otro: ' + otroTexto;
+            }
+
+            const btn = document.getElementById('submitFinalBtn');
+            btn.innerHTML = '<div class="spinner"></div> Enviando...';
+            btn.disabled = true;
+
+            // Guardar carrera final
+            selectedCareer = carreraFinal;
+            
+            // Enviar datos
+            submitResults(gameTimeSpent);
+
+            setTimeout(() => {
+                btn.innerHTML = '✅ ¡Enviado!';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                // Mostrar mensaje de éxito
+                let statusMsg = document.getElementById('auto-status-msg');
+                if (!statusMsg) {
+                    statusMsg = document.createElement('div');
+                    statusMsg.id = 'auto-status-msg';
+                    statusMsg.style.cssText = 'text-align: center; margin-top: 15px; padding: 12px; border-radius: 12px;';
+                    btn.parentElement.appendChild(statusMsg);
+                }
+                statusMsg.innerHTML = '<p style="color: #10b981; font-weight: 600;">🎉 ¡Gracias por participar!<br>Tus datos han sido registrados correctamente.</p>';
+                statusMsg.style.background = 'rgba(16, 185, 129, 0.15)';
+            }, 1500);
         }
 
         // Submit results
@@ -1228,7 +1441,7 @@
                 area3: incorrectAnswers,
                 area4: timeSpent,
                 area5: currentQuestions.length,
-                carrera: 'Trivia Educativa - Puntaje: ' + score
+                carrera: selectedCareer + ' (Puntaje: ' + score + ')'
             };
 
             // Create hidden inputs
@@ -1264,6 +1477,20 @@
             document.getElementById('celular').value = '';
             document.getElementById('email').value = '';
             document.getElementById('consentimiento').checked = false;
+            
+            // Reset career selection
+            selectedCareer = '';
+            document.querySelectorAll('.career-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('otro-input-container').style.display = 'none';
+            document.getElementById('otro-carrera-input').value = '';
+            document.getElementById('submitFinalBtn').style.display = 'none';
+            document.getElementById('submitFinalBtn').innerHTML = '✅ Listo';
+            document.getElementById('submitFinalBtn').disabled = false;
+            document.getElementById('submitFinalBtn').style.background = '';
+            
+            // Remove status message if exists
+            const statusMsg = document.getElementById('auto-status-msg');
+            if (statusMsg) statusMsg.remove();
             
             showSection('section-data');
         }
